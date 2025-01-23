@@ -33,7 +33,10 @@ public class Baymax {
             }
 
             //Check for list
-            //if (userInput.equalsIgnoreCase("list"))
+            if (userInput.equalsIgnoreCase("list")) {
+                baymax.printList();
+                continue;
+            }
 
             //add userInput into List
             baymax.addTask(userInput);
@@ -54,5 +57,13 @@ public class Baymax {
     private void addTask(String task) {
         List[listCounter] = task;
         listCounter++;
+    }
+
+    private void printList() {
+        System.out.println("______________________________________________________________");
+        for (int i = 0; i < listCounter; i++) {
+            System.out.println(List[i]);
+        }
+        System.out.println("______________________________________________________________");
     }
 }
