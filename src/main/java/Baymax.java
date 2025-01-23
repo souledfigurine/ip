@@ -1,6 +1,11 @@
 import java.util.Scanner;
 public class Baymax {
+    //Create List to store inputs
+    private String[] List = new String[100];
+    private int listCounter = 0;
     public static void main(String[] args) {
+        //instantiate Baymax
+        Baymax baymax = new Baymax();
 
         //Scanner object for user input
         Scanner scanner = new Scanner(System.in);
@@ -25,17 +30,29 @@ public class Baymax {
                         + "don't forget to smell the flowers, as you aim for the sky\n"
                         + line);
                 break;
-            } else {
-                //Echo userInput
-                //Display exit message
-                System.out.println(line
-                        + userInput
-                        + "\n"
-                        + line);
             }
+
+            //Check for list
+            //if (userInput.equalsIgnoreCase("list"))
+
+            //add userInput into List
+            baymax.addTask(userInput);
+
+            //Display exit message
+            System.out.println(line
+                    + "added: "
+                    + userInput
+                    + "\n"
+                    + line);
+
         }
 
         //close scanner
         scanner.close();
+    }
+
+    private void addTask(String task) {
+        List[listCounter] = task;
+        listCounter++;
     }
 }
