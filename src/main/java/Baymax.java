@@ -2,6 +2,7 @@ import java.util.Scanner;
 public class Baymax {
     //Create List to store inputs
     private String[] List = new String[100];
+    private Boolean[] Completed = new Boolean[100];
     private int listCounter = 0;
     public static void main(String[] args) {
         //instantiate Baymax
@@ -31,11 +32,15 @@ public class Baymax {
                         + line);
                 break;
             }
-
             //Check for list
             if (userInput.equalsIgnoreCase("list")) {
                 baymax.printList();
                 continue;
+            }
+            //mark task
+            if (userInput.startsWith("mark")) {
+                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                baymax.markAsDone(taskNumber);
             }
 
             //add userInput into List
@@ -64,6 +69,14 @@ public class Baymax {
         for (int i = 0; i < listCounter; i++) {
             System.out.println(i + 1 + ". " + List[i]);
         }
+        System.out.println("______________________________________________________________");
+    }
+
+    private void markAsDone(int taskNumber) {
+        Completed[taskNumber - 1] = true;
+        System.out.println("______________________________________________________________");
+        System.out.println("Good job on completing the task!\n"
+                        + "  [X] " + List[taskNumber - 1] );
         System.out.println("______________________________________________________________");
     }
 }
