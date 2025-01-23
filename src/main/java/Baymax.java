@@ -45,14 +45,6 @@ public class Baymax {
 
             //add userInput into List
             baymax.addTask(userInput);
-
-            //Display exit message
-            System.out.println(line
-                    + "added: "
-                    + userInput
-                    + "\n"
-                    + line);
-
         }
 
         //close scanner
@@ -62,6 +54,11 @@ public class Baymax {
     private void addTask(String task) {
         List[listCounter] = task;
         listCounter++;
+        System.out.println("______________________________________________________________\n"
+                + "added: "
+                + task
+                + "\n"
+                + "______________________________________________________________\n");
     }
 
     private void printList() {
