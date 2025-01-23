@@ -62,7 +62,7 @@ public class Baymax {
     private void printList() {
         System.out.println("______________________________________________________________");
         for (int i = 0; i < listCounter; i++) {
-            System.out.println(List[i]);
+            System.out.println(i + 1 + ". " + List[i]);
         }
         System.out.println("______________________________________________________________");
     }
