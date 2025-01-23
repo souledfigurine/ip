@@ -41,6 +41,7 @@ public class Baymax {
             if (userInput.startsWith("mark")) {
                 int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
                 baymax.markAsDone(taskNumber);
+                continue;
             }
 
             //add userInput into List
@@ -53,6 +54,7 @@ public class Baymax {
 
     private void addTask(String task) {
         List[listCounter] = task;
+        Completed[listCounter] = false;
         listCounter++;
         System.out.println("______________________________________________________________\n"
                 + "added: "
@@ -64,7 +66,12 @@ public class Baymax {
     private void printList() {
         System.out.println("______________________________________________________________");
         for (int i = 0; i < listCounter; i++) {
-            System.out.println(i + 1 + ". " + List[i]);
+            int taskNumber = i + 1;
+            if (Completed[i]) {
+                System.out.println("[x] " + taskNumber + ". " + List[i]);
+            } else {
+                System.out.println("[ ] " + taskNumber + ". " + List[i]);
+            }
         }
         System.out.println("______________________________________________________________");
     }
