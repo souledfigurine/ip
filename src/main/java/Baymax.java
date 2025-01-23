@@ -43,6 +43,12 @@ public class Baymax {
                 baymax.markAsDone(taskNumber);
                 continue;
             }
+            //unmark task
+            if (userInput.startsWith("unmark")) {
+                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                baymax.unmark(taskNumber);
+                continue;
+            }
 
             //add userInput into List
             baymax.addTask(userInput);
@@ -82,5 +88,18 @@ public class Baymax {
         System.out.println("Good job on completing the task!\n"
                         + "  [X] " + List[taskNumber - 1] );
         System.out.println("______________________________________________________________");
+    }
+
+    private void unmark(int taskNumber) {
+        if (!Completed[taskNumber - 1]) {
+            System.out.println("it's ok! the task is still there");
+        } else {
+            Completed[taskNumber - 1] = false;
+            System.out.println("______________________________________________________________");
+            System.out.println("I have unmarked the task for you!\n"
+                    + "  [ ] " + List[taskNumber - 1] );
+            System.out.println("______________________________________________________________");
+        }
+
     }
 }
