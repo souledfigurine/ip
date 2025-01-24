@@ -59,35 +59,55 @@ public class Baymax {
                 baymax.unmark(taskNumber);
                 continue;
             }
-
-            //add userInput into List
-            baymax.addTask(userInput);
+            //add Todo
+            if (userInput.startsWith("todo ")) {
+                baymax.addTodo(userInput.substring(5));
+                continue;
+            }
+            //add Deadline
+            if (userInput.startsWith("deadline ")) {
+                String[] parts = userInput.substring(9).split(" /by ");
+                baymax.addDeadline(parts[0], parts[1]);
+                continue;
+            }
+            //add Event
+            if (userInput.startsWith("event ")) {
+                String[] parts = userInput.substring(6).split(" /from ");
+                String[] timeParts = parts[1].split(" /to ");
+                baymax.addEvent(parts[0], timeParts[0], timeParts[1]);
+                continue;
+            }
+            System.out.println("Invalid command.");
         }
 
         //close scanner
         scanner.close();
     }
-
-    private void addTask(String task) {
-//        if (task.startsWith("todo")) {
-//            Categories[listCounter] = typesOfTasks.T;
-//        } else if (task.startsWith("event")) {
-//            Categories[listCounter] = typesOfTasks.E;
-//        } else if (task.startsWith("deadline")) {
-//            Categories[listCounter] = typesOfTasks.D;
-//        } else {
-//            System.out.println("______________________________________________________________\n"
-//                    + "please add a category to the task!\n"
-//                    + "______________________________________________________________\n");
-//            return;
-//        }
-        Task newTask = new Task(task);
+    //add Todo to taskList
+    private void addTodo(String task) {
+        Todo newTask = new Todo(task);
         taskList[listCounter] = newTask;
         listCounter++;
         System.out.println("______________________________________________________________\n"
-                + "added: "
-                + newTask.getName()
-                + "\n"
+                + "added: " + newTask + "\n"
+                + "______________________________________________________________\n");
+    }
+    //add Deadline to taskList
+    private void addDeadline(String task, String by) {
+        Deadline newTask = new Deadline(task, by);
+        taskList[listCounter] = newTask;
+        listCounter++;
+        System.out.println("______________________________________________________________\n"
+                + "added: " + newTask + "\n"
+                + "______________________________________________________________\n");
+    }
+    //add Event to taskList
+    private void addEvent(String task, String from, String to) {
+        Event newTask = new Event(task, from, to);
+        taskList[listCounter] = newTask;
+        listCounter++;
+        System.out.println("______________________________________________________________\n"
+                + "added: " + newTask + "\n"
                 + "______________________________________________________________\n");
     }
 
@@ -95,11 +115,7 @@ public class Baymax {
         System.out.println("______________________________________________________________");
         for (int i = 0; i < listCounter; i++) {
             int taskNumber = i + 1;
-            if (taskList[i].getIsCompleted()) {
-                System.out.println("[x] " + taskNumber + ". " + taskList[i]);
-            } else {
-                System.out.println("[ ] " + taskNumber + ". " + taskList[i]);
-            }
+            System.out.println(taskNumber + ". " + taskList[i]);
         }
         System.out.println("______________________________________________________________");
     }
@@ -108,7 +124,7 @@ public class Baymax {
         taskList[taskNumber - 1].markAsCompleted();
         System.out.println("______________________________________________________________");
         System.out.println("Good job on completing the task!\n"
-                        + "  [X] " + taskList[taskNumber - 1] );
+                        + taskList[taskNumber - 1] );
         System.out.println("______________________________________________________________");
     }
 
@@ -119,7 +135,7 @@ public class Baymax {
             taskList[taskNumber - 1].unmarkAsCompleted();
             System.out.println("______________________________________________________________");
             System.out.println("I have unmarked the task for you!\n"
-                    + "  [ ] " + taskList[taskNumber - 1] );
+                    + taskList[taskNumber - 1] );
             System.out.println("______________________________________________________________");
         }
 
