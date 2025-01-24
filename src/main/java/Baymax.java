@@ -73,7 +73,7 @@ public class Baymax {
                 baymax.delete(taskNumber);
                 continue;
             }
-
+            //Error 3: handled invalid commands
             System.out.println("Invalid command.");
         }
 
@@ -126,6 +126,7 @@ public class Baymax {
     }
 
     private void unmark(int taskNumber) {
+        //Error2: Handled invalid unmark function
         if (!taskList[taskNumber - 1].getIsCompleted()) {
             System.out.println("it's ok! the task is still there");
         } else {
@@ -138,6 +139,7 @@ public class Baymax {
     }
 
     private void delete(int taskNumber) {
+        //Error1: Handled invalid delete function
         if (taskNumber < 1 || taskNumber > listCounter) {
             System.out.println("______________________________________________________________");
             System.out.println("Invalid task number. Please enter a valid task number to delete.");
