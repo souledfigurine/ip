@@ -2,17 +2,7 @@ import java.util.PrimitiveIterator;
 import java.util.Scanner;
 import task.*;
 public class Baymax {
-//    //Create List to store inputs
-//    private String[] List = new String[100];
-//    //Array to track whether task is completed
-//    private Boolean[] Completed = new Boolean[100];
-//    //Enum array to track if it is a To-do, deadline, or event
-//    enum typesOfTasks {
-//        T, D, E
-//    }
-    //Create List to store tasks
     private Task[] taskList = new Task[100];
-//    private typesOfTasks[] Categories = new typesOfTasks[100];
     private int listCounter = 0;
     public static void main(String[] args) {
         //instantiate Baymax
@@ -77,6 +67,13 @@ public class Baymax {
                 baymax.addEvent(parts[0], timeParts[0], timeParts[1]);
                 continue;
             }
+            //delete Task
+            if (userInput.startsWith("delete")) {
+                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                baymax.delete(taskNumber);
+                continue;
+            }
+
             System.out.println("Invalid command.");
         }
 
@@ -138,6 +135,25 @@ public class Baymax {
                     + taskList[taskNumber - 1] );
             System.out.println("______________________________________________________________");
         }
+    }
 
+    private void delete(int taskNumber) {
+        if (taskNumber < 1 || taskNumber > listCounter) {
+            System.out.println("______________________________________________________________");
+            System.out.println("Invalid task number. Please enter a valid task number to delete.");
+            System.out.println("______________________________________________________________");
+            return;
+        }
+        Task taskToDelete = taskList[taskNumber - 1];
+
+        for (int i = taskNumber - 1; i < listCounter; i++) {
+            taskList[taskNumber - 1] = taskList[taskNumber];
+        }
+        taskList[listCounter] = null;
+        listCounter--;
+        System.out.println("______________________________________________________________");
+        System.out.println("yay! 1 less task for you!\n"
+                + taskToDelete );
+        System.out.println("______________________________________________________________");
     }
 }
