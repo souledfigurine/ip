@@ -1,9 +1,9 @@
+import java.util.ArrayList;
 import java.util.PrimitiveIterator;
 import java.util.Scanner;
 import task.*;
 public class Baymax {
-    private Task[] taskList = new Task[100];
-    private int listCounter = 0;
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
     public static void main(String[] args) {
         //instantiate Baymax
         Baymax baymax = new Baymax();
@@ -11,6 +11,9 @@ public class Baymax {
         //Scanner object for user input
         Scanner scanner = new Scanner(System.in);
         String userInput;
+
+        //load Tasks from file
+        taskList = Storage.loadTasks();
 
         //Display greeting
         String line = "______________________________________________________________\n";
@@ -76,15 +79,14 @@ public class Baymax {
             //Error 3: handled invalid commands
             System.out.println("Invalid command.");
         }
-
         //close scanner
         scanner.close();
     }
     //add Todo to taskList
     private void addTodo(String task) {
         Todo newTask = new Todo(task);
-        taskList[listCounter] = newTask;
-        listCounter++;
+        taskList.add(newTask);
+        Storage.saveTasks(taskList);
         System.out.println("______________________________________________________________\n"
                 + "added: " + newTask + "\n"
                 + "______________________________________________________________\n");
@@ -92,8 +94,8 @@ public class Baymax {
     //add Deadline to taskList
     private void addDeadline(String task, String by) {
         Deadline newTask = new Deadline(task, by);
-        taskList[listCounter] = newTask;
-        listCounter++;
+        taskList.add(newTask);
+        Storage.saveTasks(taskList);
         System.out.println("______________________________________________________________\n"
                 + "added: " + newTask + "\n"
                 + "______________________________________________________________\n");
@@ -101,8 +103,8 @@ public class Baymax {
     //add Event to taskList
     private void addEvent(String task, String from, String to) {
         Event newTask = new Event(task, from, to);
-        taskList[listCounter] = newTask;
-        listCounter++;
+        taskList.add(newTask);
+        Storage.saveTasks(taskList);
         System.out.println("______________________________________________________________\n"
                 + "added: " + newTask + "\n"
                 + "______________________________________________________________\n");
@@ -110,49 +112,49 @@ public class Baymax {
 
     private void printList() {
         System.out.println("______________________________________________________________");
-        for (int i = 0; i < listCounter; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             int taskNumber = i + 1;
-            System.out.println(taskNumber + ". " + taskList[i]);
+            System.out.println(taskNumber + ". " + taskList.get(i));
         }
         System.out.println("______________________________________________________________");
     }
 
     private void markAsDone(int taskNumber) {
-        taskList[taskNumber - 1].markAsCompleted();
+        taskList.get(taskNumber - 1).markAsCompleted();
+        Storage.saveTasks(taskList);
         System.out.println("______________________________________________________________");
         System.out.println("Good job on completing the task!\n"
-                        + taskList[taskNumber - 1] );
+                        + taskList.get(taskNumber - 1));
         System.out.println("______________________________________________________________");
     }
 
     private void unmark(int taskNumber) {
         //Error2: Handled invalid unmark function
-        if (!taskList[taskNumber - 1].getIsCompleted()) {
+        if (!taskList.get(taskNumber - 1).getIsCompleted()) {
             System.out.println("it's ok! the task is still there");
         } else {
-            taskList[taskNumber - 1].unmarkAsCompleted();
+            taskList.get(taskNumber - 1).unmarkAsCompleted();
+            Storage.saveTasks(taskList);
             System.out.println("______________________________________________________________");
             System.out.println("I have unmarked the task for you!\n"
-                    + taskList[taskNumber - 1] );
+                    + taskList.get(taskNumber - 1) );
             System.out.println("______________________________________________________________");
         }
     }
 
     private void delete(int taskNumber) {
         //Error1: Handled invalid delete function
-        if (taskNumber < 1 || taskNumber > listCounter) {
+        if (taskNumber < 1 || taskNumber > taskList.size()) {
             System.out.println("______________________________________________________________");
             System.out.println("Invalid task number. Please enter a valid task number to delete.");
             System.out.println("______________________________________________________________");
             return;
         }
-        Task taskToDelete = taskList[taskNumber - 1];
+        Task taskToDelete = taskList.get(taskNumber - 1);
 
-        for (int i = taskNumber - 1; i < listCounter; i++) {
-            taskList[taskNumber - 1] = taskList[taskNumber];
+        for (int i = taskNumber - 1; i < taskList.size(); i++) {
+            taskList.set(taskNumber - 1, taskList.get(taskNumber));
         }
-        taskList[listCounter] = null;
-        listCounter--;
         System.out.println("______________________________________________________________");
         System.out.println("yay! 1 less task for you!\n"
                 + taskToDelete );
