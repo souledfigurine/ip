@@ -6,29 +6,39 @@ import task.*;
 
 public class Storage {
     private static final String FILE_PATH = "./data/duke.txt";
+    private File file;
+    private File directory;
+    public Storage() {
+        file = new File(FILE_PATH);
+        directory = file.getParentFile();
 
-    public static void saveTasks(ArrayList<Task> tasks) {
-        File file = new File(FILE_PATH);
-        File directory = file.getParentFile();
+        if (directory != null && !directory.exists()) {
+            directory.mkdirs();
+        }
 
         try {
-            if (directory != null && !directory.exists()) {
-                directory.mkdirs();
+            if (!file.exists()) {
+                file.createNewFile();
             }
-            //Write tasks to file
-            FileWriter writer = new FileWriter(file);
-            for (Task task : tasks) {
-                writer.write(task.toFileString() + "\n");
-            }
-            writer.close();
         } catch (IOException e) {
-            System.out.println("Error saving tasks: " + e.getMessage());
+            System.out.println("Error creating storage file: " + e.getMessage());
         }
     }
 
-    public static ArrayList<Task> loadTasks() {
+    public void saveTasks(TaskList tasks) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) { // Overwrites file
+            for (Task task : tasks.getTasks()) {
+                writer.write(task.toString()); // Writes each task to file
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving tasks.");
+        }
+    }
+
+    public TaskList loadTasks() {
         File file = new File(FILE_PATH);
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        TaskList tasks = new TaskList();
 
         if (!file.exists()) {
             return tasks;
@@ -39,7 +49,7 @@ public class Storage {
             String line;
             while ((line = reader.readLine()) != null) {
                 Task task = parseTask(line);
-                tasks.add(task);
+                tasks.addTask(task);
             }
             reader.close();
         } catch (IOException e) {

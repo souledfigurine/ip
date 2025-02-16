@@ -56,4 +56,7 @@ public class TaskList {
     public void delete(int taskNumber) {
         tasks.remove(taskNumber - 1);
     }
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
 }

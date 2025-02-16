@@ -14,7 +14,7 @@ public class Baymax {
         storage = new Storage();
 
         try {
-            tasks = new TaskList(storage.loadTasks());
+            tasks = storage.loadTasks();
         } catch (Exception e) {
             ui.printError("Error loading tasks. Starting with an empty list.");
             tasks = new TaskList();

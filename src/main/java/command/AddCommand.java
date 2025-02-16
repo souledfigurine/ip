@@ -1,8 +1,12 @@
 package command;
 
 public abstract class AddCommand extends Command {
-    String name;
-    public AddCommand(String name) {
-        this.name = name;
+    protected final String taskName;
+    public AddCommand(String taskName) {
+        this.taskName = taskName;
+    }
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

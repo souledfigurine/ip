@@ -3,7 +3,6 @@ package baymax;
 import task.Deadline;
 import task.Event;
 import task.Task;
-import task.Todo;
 
 import java.util.Scanner;
 
@@ -14,34 +13,34 @@ public class Ui {
     public Ui() {
         scanner = new Scanner(System.in);
     }
-    public static void printNewTask(Task newTask) {
+    public void printNewTodo(Task newTask) {
         System.out.print(LINE);
         System.out.println("added: " + newTask);
         System.out.print(LINE);
     }
-    public static void printNewDeadline(Deadline newTask) {
+    public void printNewDeadline(Deadline newTask) {
         System.out.print(LINE);
         System.out.println("added: " + newTask);
         System.out.print(LINE);
     }
-    public static void printNewEvent(Event newTask) {
+    public void printNewEvent(Event newTask) {
         System.out.print(LINE);
         System.out.println("added: " + newTask);
         System.out.print(LINE);
     }
-    public static void printMarkAsDone(Task task) {
+    public void printMarkAsDone(Task task) {
         System.out.println(LINE);
         System.out.println("Good job on completing the task!\n" + task);
         System.out.println(LINE);
     }
-    public static void printUnmark(Task task) {
+    public void printUnmark(Task task) {
         System.out.println(LINE);
         System.out.println("I have unmarked the task for you!\n" + task);
         System.out.println(LINE);
     }
-    public static void printDeleteTask(Task taskToDelete) {
+    public void printDeleteTask(Task taskToDelete) {
         System.out.println(LINE);
-        System.out.println("yay! 1 less task for you!")
+        System.out.println("yay! 1 less task for you!");
         System.out.println(taskToDelete);
         System.out.println(LINE);
     }

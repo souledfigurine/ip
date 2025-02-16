@@ -12,4 +12,7 @@ public abstract class Command {
     public boolean isExit() {
         return this.exit;
     }
+    protected void makeExit() {
+        this.exit = Boolean.TRUE;
+    }
 }
