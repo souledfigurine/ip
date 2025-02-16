@@ -62,4 +62,7 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+    public Boolean isEmpty() {
+        return tasks.isEmpty();
+    }
 }

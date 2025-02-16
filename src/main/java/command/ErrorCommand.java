@@ -11,6 +11,6 @@ public class ErrorCommand extends Command {
     }
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-
+        ui.printError(errorMessage);
     }
 }

@@ -14,19 +14,19 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
     public void printNewTodo(Task newTask) {
-        System.out.print(LINE);
+        System.out.println(LINE);
         System.out.println("added: " + newTask);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
     public void printNewDeadline(Deadline newTask) {
-        System.out.print(LINE);
+        System.out.println(LINE);
         System.out.println("added: " + newTask);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
     public void printNewEvent(Event newTask) {
-        System.out.print(LINE);
+        System.out.println(LINE);
         System.out.println("added: " + newTask);
-        System.out.print(LINE);
+        System.out.println(LINE);
     }
     public void printMarkAsDone(Task task) {
         System.out.println(LINE);
@@ -57,10 +57,26 @@ public class Ui {
         System.out.println("don't forget to smell the flowers, as you aim for the sky");
         System.out.println(LINE);
     }
+    public void printList(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            printError("You are free! You currently have 0 tasks");
+        }
+
+        System.out.println(LINE);
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            int taskNumber = i + 1;
+            System.out.println(taskNumber + ". " + tasks.getTasks().get(i));
+        }
+        System.out.println(LINE);
+    }
     public void printError(String ErrorMessage) {
         System.out.println(ErrorMessage);
     }
     public String readCommand() {
         return scanner.nextLine();
+    }
+
+    public void closeScanner() {
+        scanner.close();
     }
 }

@@ -28,7 +28,7 @@ public class Storage {
     public void saveTasks(TaskList tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) { // Overwrites file
             for (Task task : tasks.getTasks()) {
-                writer.write(task.toString()); // Writes each task to file
+                writer.write(task.toFileString()); // Writes each task to file
                 writer.newLine();
             }
         } catch (IOException e) {

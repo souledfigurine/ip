@@ -6,14 +6,16 @@ public class Parser {
     public static Command parse(String input) {
         String commandWord = input.split(" ")[0];
         String[] parts;
-        int taskNumber = Integer.parseInt(input.split(" ")[1]);
+        int taskNumber;
 
         switch (commandWord) {
         case "list":
             return new ListCommand();
         case "mark":
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
             return new MarkCommand(taskNumber);
         case "unmark":
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
             return new UnmarkCommand(taskNumber);
         case "todo":
             return new AddTodoCommand(input.substring(5));
@@ -25,7 +27,10 @@ public class Parser {
             String[] timeParts = parts[1].split(" /to ");
             return new AddEventCommand(parts[0], timeParts[0], timeParts[1]);
         case "delete":
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
             return new DeleteCommand(taskNumber);
+        case "bye":
+            return new ExitCommand();
         default:
             return new ErrorCommand("Wrong input");
         }
