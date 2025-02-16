@@ -1,3 +1,5 @@
+package baymax;
+
 import task.Deadline;
 import task.Event;
 import task.Todo;

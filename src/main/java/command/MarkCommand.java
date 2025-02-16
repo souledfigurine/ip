@@ -1,5 +1,9 @@
 package command;
 
+import baymax.Storage;
+import baymax.TaskList;
+import baymax.Ui;
+
 public class MarkCommand extends Command {
     private int taskIndex;
 
@@ -8,7 +12,6 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        return null
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
     }
 }

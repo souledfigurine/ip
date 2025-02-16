@@ -1,3 +1,5 @@
+package baymax;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -46,13 +48,20 @@ public class Ui {
 
     public void printGreeting() {
         System.out.println(LINE);
-        System.out.println("Hello! I'm Baymax, your personal emotional companion :)");
+        System.out.println("Hello! I'm baymax.Baymax, your personal emotional companion :)");
         System.out.println("How may I help you today?");
         System.out.println(LINE);
     }
-
-
-    public String readCommand(String input) {
+    public void printExit() {
+        System.out.println(LINE);
+        System.out.println("Goodbye. Have a nice day, and remember:");
+        System.out.println("don't forget to smell the flowers, as you aim for the sky");
+        System.out.println(LINE);
+    }
+    public void printError(String ErrorMessage) {
+        System.out.println(ErrorMessage);
+    }
+    public String readCommand() {
         return scanner.nextLine();
     }
 }

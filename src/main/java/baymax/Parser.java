@@ -1,3 +1,5 @@
+package baymax;
+
 import command.*;
 
 public class Parser {

@@ -1,5 +1,9 @@
 package command;
 
+import baymax.Storage;
+import baymax.TaskList;
+import baymax.Ui;
+
 public class AddEventCommand extends AddCommand {
     private final String from;
     private final String to;
@@ -10,7 +14,7 @@ public class AddEventCommand extends AddCommand {
         this.to = to;
     }
     @Override
-    public void execute() {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
 
     }
 }

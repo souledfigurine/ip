@@ -1,5 +1,9 @@
 package command;
 
+import baymax.Storage;
+import baymax.TaskList;
+import baymax.Ui;
+
 public class DeleteCommand extends Command {
     private final int taskNumber;
 
@@ -7,7 +11,7 @@ public class DeleteCommand extends Command {
         this.taskNumber = taskNumber;
     }
     @Override
-    public void execute() {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
 
     }
 }

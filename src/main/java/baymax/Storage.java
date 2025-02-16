@@ -1,3 +1,5 @@
+package baymax;
+
 import java.io.*;
 import java.util.ArrayList;
 import task.*;
