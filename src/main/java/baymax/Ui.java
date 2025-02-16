@@ -38,10 +38,10 @@ public class Ui {
         System.out.println("I have unmarked the task for you!\n" + task);
         System.out.println(LINE);
     }
-    public void printDeleteTask(Task taskToDelete) {
+    public void printDeleteTask(int taskNumber) {
         System.out.println(LINE);
         System.out.println("yay! 1 less task for you!");
-        System.out.println(taskToDelete);
+        System.out.println("delete " + taskNumber);
         System.out.println(LINE);
     }
 

@@ -53,7 +53,10 @@ public class TaskList {
      * Deletes a task from the task list
      * @param taskNumber The number assigned to the task in the task list
      */
-    public void delete(int taskNumber) {
+    public void delete(int taskNumber) throws IndexOutOfBoundsException {
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid task number! Please enter a valid index.");
+        }
         tasks.remove(taskNumber - 1);
     }
     public ArrayList<Task> getTasks() {
