@@ -9,14 +9,14 @@ public class Baymax {
         //instantiate Baymax
         Baymax baymax = new Baymax();
 
-        //Scanner object for user input
+        //Scanner object for user input //ui
         Scanner scanner = new Scanner(System.in);
         String userInput;
 
-        //load Tasks from file
+        //load Tasks from file //tasklist
         taskList = Storage.loadTasks();
 
-        //Display greeting
+        //Display greeting //ui
         String line = "______________________________________________________________\n";
         System.out.println(line
                 + "Hello! I'm Baymax, your personal emotional companion :)\n"
@@ -25,6 +25,7 @@ public class Baymax {
 
         //Input loop
         while (true) {
+        //ui
             userInput = scanner.nextLine();
 
             //Check for end of conversation
