@@ -1,4 +1,11 @@
 package command;
 
-public class ListCommand {
+public class ListCommand extends Command {
+    public ListCommand() {
+
+    }
+    @Override
+    public void execute() {
+
+    }
 }
