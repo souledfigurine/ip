@@ -117,11 +117,16 @@ public class Ui {
     public void printList(TaskList tasks) {
         if (tasks.isEmpty()) {
             printError("You are free! You currently have 0 tasks.");
-            return;
         }
         generateList(tasks);
     }
 
+    /**
+     * Prints the list of matching tasks based on the user's search query.
+     * If no tasks match the search criteria, an error message is displayed.
+     *
+     * @param matchingTasks The {@code TaskList} containing tasks that match the search keyword.
+     */
     public void printMatchingList(TaskList matchingTasks) {
         if (matchingTasks.isEmpty()) {
             printError("oh man, it seems like there are no matching tasks");
@@ -129,6 +134,12 @@ public class Ui {
         generateList(matchingTasks);
     }
 
+    /**
+     * Generates and prints a formatted list of tasks.
+     * Each task is displayed with its corresponding index number.
+     *
+     * @param tasks The {@code TaskList} containing the tasks to be displayed.
+     */
     public void generateList(TaskList tasks) {
         System.out.println(LINE);
         for (int i = 0; i < tasks.getTasks().size(); i++) {

@@ -91,6 +91,13 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    /**
+     * Searches for tasks that contain the specified keyword in their name.
+     * The search is case-insensitive.
+     *
+     * @param keyword The keyword to search for within task names.
+     * @return A new {@code TaskList} containing tasks that match the search keyword.
+     */
     public TaskList findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (Task task : tasks) {
