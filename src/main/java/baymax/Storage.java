@@ -4,10 +4,21 @@ import java.io.*;
 
 import baymax.task.*;
 
+/**
+ * Handles the loading and saving of tasks to a storage file.
+ * This class is responsible for reading and writing tasks to a file
+ * to maintain persistence between program runs.
+ */
 public class Storage {
     private static final String FILE_PATH = "./data/duke.txt";
     private File file;
     private File directory;
+
+    /**
+     * Constructs a {@code Storage} object and initializes the storage file.
+     * If the required directory does not exist, it creates the directory.
+     * If the storage file does not exist, it creates a new file.
+     */
     public Storage() {
         file = new File(FILE_PATH);
         directory = file.getParentFile();
@@ -25,10 +36,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current list of tasks to the storage file.
+     * The file is overwritten each time this method is called.
+     *
+     * @param tasks The {@code TaskList} containing tasks to be saved.
+     */
     public void saveTasks(TaskList tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) { // Overwrites file
             for (Task task : tasks.getTasks()) {
-                writer.write(task.toFileString()); // Writes each baymax.task to file
+                writer.write(task.toFileString()); // Writes each task to file
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -36,6 +53,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the storage file.
+     * If the file does not exist, returns an empty {@code TaskList}.
+     *
+     * @return A {@code TaskList} containing the tasks loaded from the file.
+     */
     public TaskList loadTasks() {
         File file = new File(FILE_PATH);
         TaskList tasks = new TaskList();
@@ -49,7 +72,9 @@ public class Storage {
             String line;
             while ((line = reader.readLine()) != null) {
                 Task task = parseTask(line);
-                tasks.addTask(task);
+                if (task != null) {
+                    tasks.addTask(task);
+                }
             }
             reader.close();
         } catch (IOException e) {
@@ -58,11 +83,18 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Parses a line from the storage file into a {@code Task} object.
+     * If the line is corrupted or unrecognized, it returns {@code null}.
+     *
+     * @param line The line from the file representing a stored task.
+     * @return A {@code Task} object if successfully parsed, {@code null} otherwise.
+     */
     public static Task parseTask(String line) {
         try {
             String[] parts = line.split(" \\| ");
             String type = parts[0];
-            Boolean isCompleted = parts[1].equals("true");
+            boolean isCompleted = parts[1].equals("true");
 
             switch (type) {
                 case "T":
@@ -75,7 +107,7 @@ public class Storage {
                     return null;
             }
         } catch (Exception e) {
-            System.out.println("Skipping corrupted baymax.task: " + line);
+            System.out.println("Skipping corrupted task: " + line);
             return null;
         }
     }

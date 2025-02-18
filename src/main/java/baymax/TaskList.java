@@ -4,33 +4,43 @@ import baymax.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks managed by the Baymax chatbot.
+ * Provides functionality to add, delete, mark, and unmark tasks.
+ */
 public class TaskList {
     private static ArrayList<Task> tasks;
 
     /**
-     * Generates a new empty baymax.task list
+     * Constructs a new empty {@code TaskList}.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
+
     /**
-     * Represents a list of tasks
+     * Constructs a {@code TaskList} initialized with an existing list of tasks.
+     *
+     * @param taskList The list of tasks to initialize with.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.tasks = taskList;
     }
 
     /**
-     * Adds a baymax.task to the list of baymax.task
-     * @param task The new baymax.task to be added
+     * Adds a task to the task list.
+     *
+     * @param task The new task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Marks a baymax.task as completed
-     * @param taskNumber The number assigned to the baymax.task in the baymax.task list
+     * Marks a task as completed.
+     *
+     * @param taskNumber The index (1-based) of the task to mark as completed.
+     * @return The task that was marked as completed.
      */
     public Task markAsDone(int taskNumber) {
         Task task = tasks.get(taskNumber - 1);
@@ -39,8 +49,10 @@ public class TaskList {
     }
 
     /**
-     * Unmarks a completed baymax.task as uncompleted
-     * @param taskNumber The number assigned to the baymax.task in the baymax.task list
+     * Unmarks a task, changing its status to incomplete.
+     *
+     * @param taskNumber The index (1-based) of the task to unmark.
+     * @return The task that was unmarked.
      */
     public Task unmark(int taskNumber) {
         Task task = tasks.get(taskNumber - 1);
@@ -49,18 +61,32 @@ public class TaskList {
     }
 
     /**
-     * Deletes a baymax.task from the baymax.task list
-     * @param taskNumber The number assigned to the baymax.task in the baymax.task list
+     * Deletes a task from the task list.
+     *
+     * @param taskNumber The index (1-based) of the task to delete.
+     * @throws IndexOutOfBoundsException If the given task number is invalid.
      */
     public void delete(int taskNumber) throws IndexOutOfBoundsException {
         if (taskNumber < 1 || taskNumber > tasks.size()) {
-            throw new IndexOutOfBoundsException("Invalid baymax.task number! Please enter a valid index.");
+            throw new IndexOutOfBoundsException("Invalid task number! Please enter a valid index.");
         }
         tasks.remove(taskNumber - 1);
     }
+
+    /**
+     * Returns the list of tasks.
+     *
+     * @return An {@code ArrayList} containing all tasks.
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
+    /**
+     * Checks if the task list is empty.
+     *
+     * @return {@code true} if the task list is empty, otherwise {@code false}.
+     */
     public Boolean isEmpty() {
         return tasks.isEmpty();
     }
