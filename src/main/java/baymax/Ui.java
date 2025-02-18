@@ -119,7 +119,17 @@ public class Ui {
             printError("You are free! You currently have 0 tasks.");
             return;
         }
+        generateList(tasks);
+    }
 
+    public void printMatchingList(TaskList matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            printError("oh man, it seems like there are no matching tasks");
+        }
+        generateList(matchingTasks);
+    }
+
+    public void generateList(TaskList tasks) {
         System.out.println(LINE);
         for (int i = 0; i < tasks.getTasks().size(); i++) {
             int taskNumber = i + 1;

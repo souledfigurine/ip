@@ -90,4 +90,15 @@ public class TaskList {
     public Boolean isEmpty() {
         return tasks.isEmpty();
     }
+
+    public TaskList findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (Task task : tasks) {
+            if (task.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                matchingTasks.add(task);
+            }
+        }
+        TaskList matchingTaskList = new TaskList(matchingTasks);
+        return matchingTaskList;
+    }
 }
