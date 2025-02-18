@@ -1,14 +1,14 @@
 package baymax.task;
 
 public abstract class Task {
-    protected String Name;
+    protected String name;
     protected Boolean isCompleted;
     public Task(String name) {
-        this.Name = name;
+        this.name = name;
         this.isCompleted = false;
     }
     public Task(String name, boolean isCompleted) {
-        this.Name = name;
+        this.name = name;
         this.isCompleted = isCompleted;
     }
     public void markAsCompleted() {
@@ -20,18 +20,12 @@ public abstract class Task {
     public String getStatusIcon() {
         return (isCompleted ? "[X]" : "[ ]");
     }
-    public String getName() {
-        return this.Name;
-    }
-    public Boolean getIsCompleted() {
-        return this.isCompleted;
-    }
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.Name;
+        return getStatusIcon() + " " + this.name;
     }
 
     public String toFileString() {
-        return " | " + isCompleted + " | " + this.Name;
+        return " | " + isCompleted + " | " + this.name;
     }
 }

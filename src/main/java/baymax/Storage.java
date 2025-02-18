@@ -8,6 +8,7 @@ public class Storage {
     private static final String FILE_PATH = "./data/duke.txt";
     private File file;
     private File directory;
+
     public Storage() {
         file = new File(FILE_PATH);
         directory = file.getParentFile();
@@ -65,14 +66,14 @@ public class Storage {
             Boolean isCompleted = parts[1].equals("true");
 
             switch (type) {
-                case "T":
-                    return new Todo(parts[2], isCompleted);
-                case "D":
-                    return new Deadline(parts[2], parts[3], isCompleted);
-                case "E":
-                    return new Event(parts[2], parts[3], parts[4], isCompleted);
-                default:
-                    return null;
+            case "T":
+                return new Todo(parts[2], isCompleted);
+            case "D":
+                return new Deadline(parts[2], parts[3], isCompleted);
+            case "E":
+                return new Event(parts[2], parts[3], parts[4], isCompleted);
+            default:
+                return null;
             }
         } catch (Exception e) {
             System.out.println("Skipping corrupted baymax.task: " + line);
