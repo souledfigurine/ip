@@ -1,0 +1,80 @@
+package baymax.task;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+public class Event extends Task {
+    private LocalDateTime fromDateTime;
+    private LocalDateTime toDateTime;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+
+    private static final DateTimeFormatter INPUT_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+
+    public Event(String name, String from, String to) {
+        super(name);
+        parseDates(from, to);
+    }
+
+    public Event(String name, String from, String to, Boolean isCompleted) {
+        super(name, isCompleted);
+        parseDates(from, to);
+    }
+
+    private void parseDates(String from, String to) {
+        try {
+            if (from.contains(" ")) {
+                this.fromDateTime = LocalDateTime.parse(from, INPUT_FORMATTER_2);
+            } else {
+                this.fromDate = LocalDate.parse(from, INPUT_FORMATTER_1);
+            }
+
+            if (to.contains(" ")) {
+                this.toDateTime = LocalDateTime.parse(to, INPUT_FORMATTER_2);
+            } else {
+                this.toDate = LocalDate.parse(to, INPUT_FORMATTER_1);
+            }
+
+            if (getFromAsDateTime().isAfter(getToAsDateTime())) {
+                System.out.println("Error: 'from' date must be before 'to' date.");
+                this.fromDateTime = null;
+                this.toDateTime = null;
+                this.fromDate = null;
+                this.toDate = null;
+            }
+
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid event format! Use 'yyyy-MM-dd' or 'd/M/yyyy HHmm' (e.g., 2/12/2019 1800).");
+        }
+    }
+
+    private LocalDateTime getFromAsDateTime() {
+        return fromDateTime != null ? fromDateTime : (fromDate != null ? fromDate.atStartOfDay() : null);
+    }
+
+    private LocalDateTime getToAsDateTime() {
+        return toDateTime != null ? toDateTime : (toDate != null ? toDate.atStartOfDay() : null);
+    }
+
+    private String formatDateTime(LocalDateTime dateTime, LocalDate date) {
+        if (dateTime != null) return dateTime.format(DISPLAY_FORMATTER);
+        if (date != null) return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "Invalid date";
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from: " + formatDateTime(fromDateTime, fromDate) +
+                " to: " + formatDateTime(toDateTime, toDate) + ")";
+    }
+
+    @Override
+    public String toFileString() {
+        return "E" + super.toFileString() + " | " + (fromDateTime != null ? fromDateTime.format(INPUT_FORMATTER_2) : fromDate.format(INPUT_FORMATTER_1)) +
+                " | " + (toDateTime != null ? toDateTime.format(INPUT_FORMATTER_2) : toDate.format(INPUT_FORMATTER_1));
+    }
+}
