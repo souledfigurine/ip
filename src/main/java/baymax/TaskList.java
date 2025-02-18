@@ -13,6 +13,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
+
     /**
      * Represents a list of tasks
      */
@@ -22,6 +23,7 @@ public class TaskList {
 
     /**
      * Adds a baymax.task to the list of baymax.task
+     *
      * @param task The new baymax.task to be added
      */
     public void addTask(Task task) {
@@ -30,6 +32,7 @@ public class TaskList {
 
     /**
      * Marks a baymax.task as completed
+     *
      * @param taskNumber The number assigned to the baymax.task in the baymax.task list
      */
     public Task markAsDone(int taskNumber) {
@@ -40,6 +43,7 @@ public class TaskList {
 
     /**
      * Unmarks a completed baymax.task as uncompleted
+     *
      * @param taskNumber The number assigned to the baymax.task in the baymax.task list
      */
     public Task unmark(int taskNumber) {
@@ -50,6 +54,7 @@ public class TaskList {
 
     /**
      * Deletes a baymax.task from the baymax.task list
+     *
      * @param taskNumber The number assigned to the baymax.task in the baymax.task list
      */
     public void delete(int taskNumber) throws IndexOutOfBoundsException {
@@ -58,10 +63,23 @@ public class TaskList {
         }
         tasks.remove(taskNumber - 1);
     }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
     public Boolean isEmpty() {
         return tasks.isEmpty();
+    }
+
+    public TaskList findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (Task task : tasks) {
+            if (task.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                matchingTasks.add(task);
+            }
+        }
+        TaskList matchingTaskList = new TaskList(matchingTasks);
+        return matchingTaskList;
     }
 }

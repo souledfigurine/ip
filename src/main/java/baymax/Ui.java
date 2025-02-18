@@ -13,31 +13,37 @@ public class Ui {
     public Ui() {
         scanner = new Scanner(System.in);
     }
+
     public void printNewTodo(Task newTask) {
         System.out.println(LINE);
         System.out.println("added: " + newTask);
         System.out.println(LINE);
     }
+
     public void printNewDeadline(Deadline newTask) {
         System.out.println(LINE);
         System.out.println("added: " + newTask);
         System.out.println(LINE);
     }
+
     public void printNewEvent(Event newTask) {
         System.out.println(LINE);
         System.out.println("added: " + newTask);
         System.out.println(LINE);
     }
+
     public void printMarkAsDone(Task task) {
         System.out.println(LINE);
         System.out.println("Good job on completing the task!\n" + task);
         System.out.println(LINE);
     }
+
     public void printUnmark(Task task) {
         System.out.println(LINE);
         System.out.println("I have unmarked the task for you!\n" + task);
         System.out.println(LINE);
     }
+
     public void printDeleteTask(int taskNumber) {
         System.out.println(LINE);
         System.out.println("yay! 1 less task for you!");
@@ -51,17 +57,33 @@ public class Ui {
         System.out.println("How may I help you today?");
         System.out.println(LINE);
     }
+
     public void printExit() {
         System.out.println(LINE);
         System.out.println("Goodbye. Have a nice day, and remember:");
         System.out.println("don't forget to smell the flowers, as you aim for the sky");
         System.out.println(LINE);
     }
+
     public void printList(TaskList tasks) {
         if (tasks.isEmpty()) {
             printError("You are free! You currently have 0 tasks");
         }
+        generateList(tasks);
+    }
 
+    public void printError(String ErrorMessage) {
+        System.out.println(ErrorMessage);
+    }
+
+    public void printMatchingList(TaskList matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            printError("oh man, it seems like there are no matching tasks");
+        }
+        generateList(matchingTasks);
+    }
+
+    public void generateList(TaskList tasks) {
         System.out.println(LINE);
         for (int i = 0; i < tasks.getTasks().size(); i++) {
             int taskNumber = i + 1;
@@ -69,9 +91,7 @@ public class Ui {
         }
         System.out.println(LINE);
     }
-    public void printError(String ErrorMessage) {
-        System.out.println(ErrorMessage);
-    }
+
     public String readCommand() {
         return scanner.nextLine();
     }

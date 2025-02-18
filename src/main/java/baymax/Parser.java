@@ -31,6 +31,8 @@ public class Parser {
             return new DeleteCommand(taskNumber);
         case "bye":
             return new ExitCommand();
+        case "find":
+            return new FindCommand(input.substring(5));
         default:
             return new ErrorCommand("Wrong input");
         }
