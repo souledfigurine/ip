@@ -23,7 +23,7 @@ public abstract class Task {
     /**
      * Constructs a new {@code Task} with the specified name and completion status.
      *
-     * @param name The name of the task.
+     * @param name        The name of the task.
      * @param isCompleted {@code true} if the task is completed, {@code false} otherwise.
      */
     public Task(String name, boolean isCompleted) {
