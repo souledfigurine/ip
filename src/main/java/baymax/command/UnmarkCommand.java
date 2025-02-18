@@ -15,6 +15,6 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.unmark(taskNumber);
         storage.saveTasks(tasks);
-        ui.printMarkAsDone(task);
+        ui.printUnmark(task);
     }
 }
