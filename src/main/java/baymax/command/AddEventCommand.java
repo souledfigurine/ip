@@ -1,9 +1,9 @@
-package command;
+package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.Ui;
-import task.Event;
+import baymax.task.Event;
 
 public class AddEventCommand extends AddCommand {
     private final String from;

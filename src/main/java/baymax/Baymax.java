@@ -1,8 +1,6 @@
 package baymax;
 
-import java.util.Scanner;
-import command.Command;
-import task.*;
+import baymax.command.Command;
 
 public class Baymax {
     private Storage storage;
@@ -32,13 +30,13 @@ public class Baymax {
                 String userInput = ui.readCommand();
                 Command command = Parser.parse(userInput);
                 if (command == null) {
-                    ui.printError("Invalid command. Please try again.");
+                    ui.printError("Invalid baymax.command. Please try again.");
                     continue;
                 }
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (IllegalArgumentException e) {
-                ui.printError("Invalid command. Please try again.");
+                ui.printError("Invalid baymax.command. Please try again.");
             }
         }
         ui.closeScanner();

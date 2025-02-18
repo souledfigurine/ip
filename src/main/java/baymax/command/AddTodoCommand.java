@@ -1,9 +1,9 @@
-package command;
+package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.Ui;
-import task.Todo;
+import baymax.task.Todo;
 
 public class AddTodoCommand extends AddCommand {
     public AddTodoCommand(String taskName) {

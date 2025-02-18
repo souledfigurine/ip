@@ -1,4 +1,4 @@
-package command;
+package baymax.command;
 
 import baymax.TaskList;
 import baymax.Storage;

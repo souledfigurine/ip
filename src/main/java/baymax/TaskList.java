@@ -1,9 +1,6 @@
 package baymax;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
-import task.Task;
+import baymax.task.Task;
 
 import java.util.ArrayList;
 
@@ -11,7 +8,7 @@ public class TaskList {
     private static ArrayList<Task> tasks;
 
     /**
-     * Generates a new empty task list
+     * Generates a new empty baymax.task list
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -24,38 +21,40 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list of task
-     * @param task The new task to be added
+     * Adds a baymax.task to the list of baymax.task
+     * @param task The new baymax.task to be added
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Marks a task as completed
-     * @param taskNumber The number assigned to the task in the task list
+     * Marks a baymax.task as completed
+     * @param taskNumber The number assigned to the baymax.task in the baymax.task list
      */
-    public void markAsDone(int taskNumber) {
+    public Task markAsDone(int taskNumber) {
         Task task = tasks.get(taskNumber - 1);
         task.markAsCompleted();
+        return task;
     }
 
     /**
-     * Unmarks a completed task as uncompleted
-     * @param taskNumber The number assigned to the task in the task list
+     * Unmarks a completed baymax.task as uncompleted
+     * @param taskNumber The number assigned to the baymax.task in the baymax.task list
      */
-    public void unmark(int taskNumber) {
+    public Task unmark(int taskNumber) {
         Task task = tasks.get(taskNumber - 1);
         task.unmarkAsCompleted();
+        return task;
     }
 
     /**
-     * Deletes a task from the task list
-     * @param taskNumber The number assigned to the task in the task list
+     * Deletes a baymax.task from the baymax.task list
+     * @param taskNumber The number assigned to the baymax.task in the baymax.task list
      */
     public void delete(int taskNumber) throws IndexOutOfBoundsException {
         if (taskNumber < 1 || taskNumber > tasks.size()) {
-            throw new IndexOutOfBoundsException("Invalid task number! Please enter a valid index.");
+            throw new IndexOutOfBoundsException("Invalid baymax.task number! Please enter a valid index.");
         }
         tasks.remove(taskNumber - 1);
     }

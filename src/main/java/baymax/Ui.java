@@ -1,8 +1,8 @@
 package baymax;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
+import baymax.task.Deadline;
+import baymax.task.Event;
+import baymax.task.Task;
 
 import java.util.Scanner;
 
@@ -30,17 +30,17 @@ public class Ui {
     }
     public void printMarkAsDone(Task task) {
         System.out.println(LINE);
-        System.out.println("Good job on completing the task!\n" + task);
+        System.out.println("Good job on completing the baymax.task!\n" + task);
         System.out.println(LINE);
     }
     public void printUnmark(Task task) {
         System.out.println(LINE);
-        System.out.println("I have unmarked the task for you!\n" + task);
+        System.out.println("I have unmarked the baymax.task for you!\n" + task);
         System.out.println(LINE);
     }
     public void printDeleteTask(int taskNumber) {
         System.out.println(LINE);
-        System.out.println("yay! 1 less task for you!");
+        System.out.println("yay! 1 less baymax.task for you!");
         System.out.println("delete " + taskNumber);
         System.out.println(LINE);
     }

@@ -1,4 +1,4 @@
 T | false | cs2103
-T | false | run
-D | false | oop | 2025-03-14
+D | true | oop | 2025-03-14
 E | false | film festival | 2025-03-14 | 2025-03-24
+E | false | midterms | 2024-12-05 | 2025-01-01

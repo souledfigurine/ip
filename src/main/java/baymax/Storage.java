@@ -1,8 +1,8 @@
 package baymax;
 
 import java.io.*;
-import java.util.ArrayList;
-import task.*;
+
+import baymax.task.*;
 
 public class Storage {
     private static final String FILE_PATH = "./data/duke.txt";
@@ -28,7 +28,7 @@ public class Storage {
     public void saveTasks(TaskList tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) { // Overwrites file
             for (Task task : tasks.getTasks()) {
-                writer.write(task.toFileString()); // Writes each task to file
+                writer.write(task.toFileString()); // Writes each baymax.task to file
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -75,7 +75,7 @@ public class Storage {
                     return null;
             }
         } catch (Exception e) {
-            System.out.println("Skipping corrupted task: " + line);
+            System.out.println("Skipping corrupted baymax.task: " + line);
             return null;
         }
     }

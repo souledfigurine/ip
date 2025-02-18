@@ -1,6 +1,6 @@
 package baymax;
 
-import command.*;
+import baymax.command.*;
 
 public class Parser {
     public static Command parse(String input) {

@@ -1,9 +1,9 @@
-package command;
+package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.Ui;
-import task.Deadline;
+import baymax.task.Deadline;
 
 public class AddDeadlineCommand extends AddCommand{
     String by;

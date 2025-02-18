@@ -1,9 +1,8 @@
-package command;
+package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.Ui;
-import task.Task;
 
 public class DeleteCommand extends Command {
     private final int taskNumber;
