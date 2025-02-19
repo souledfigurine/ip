@@ -103,7 +103,7 @@ public class Ui {
      */
     public void printExit() {
         System.out.println(LINE);
-        System.out.println("Goodbye. Have a nice day, and remember:");
+        System.out.println("Goodbye! Have a nice day, and remember:");
         System.out.println("Don't forget to smell the flowers as you aim for the sky.");
         System.out.println(LINE);
     }
