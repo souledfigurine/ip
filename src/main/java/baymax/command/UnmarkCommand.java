@@ -2,7 +2,6 @@ package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
-import baymax.Ui;
 import baymax.task.Task;
 
 /**
@@ -27,14 +26,21 @@ public class UnmarkCommand extends Command {
      * saving the updated task list to storage, and notifying the user.
      *
      * @param tasks   The task list containing the task to be unmarked.
-     * @param ui      The UI component used to display messages.
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Task task = tasks.unmark(taskNumber);
         storage.saveTasks(tasks);
-        ui.printUnmark(task);
+        return printUnmark(task);
+    }
+    /**
+     * Prints a message when a task is unmarked as completed.
+     *
+     * @param task The task that was unmarked.
+     */
+    private String printUnmark(Task task) {
+        return "I have unmarked the task: " + task + " for you!";
     }
 }
 

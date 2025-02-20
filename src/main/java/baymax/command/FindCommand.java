@@ -2,10 +2,6 @@ package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
-import baymax.Ui;
-import baymax.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command that searches for tasks containing a specific keyword in their name.
@@ -28,12 +24,38 @@ public class FindCommand extends Command {
      * and displaying the results to the user.
      *
      * @param tasks   The task list to search through.
-     * @param ui      The UI component used to display messages.
      * @param storage The storage handler (not used in this command).
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         TaskList matchingList = tasks.findTasks(keyword);
-        ui.printMatchingList(matchingList);
+        return printMatchingList(matchingList);
+    }
+    /**
+     * Prints the list of matching tasks based on the user's search query.
+     * If no tasks match the search criteria, an error message is displayed.
+     *
+     * @param matchingTasks The {@code TaskList} containing tasks that match the search keyword.
+     */
+    private String printMatchingList(TaskList matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            return "oh man, it seems like there are no matching tasks";
+        }
+        return generateList(matchingTasks);
+    }
+
+    /**
+     * Generates a formatted list of tasks.
+     * Each task is displayed with its corresponding index number.
+     *
+     * @param tasks The {@code TaskList} containing the tasks to be displayed.
+     */
+    private String generateList(TaskList tasks) {
+        String output = null;
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            int taskNumber = i + 1;
+            output += taskNumber + ". " + tasks.getTasks().get(i) + "\n";
+        }
+        return output;
     }
 }

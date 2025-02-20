@@ -2,7 +2,7 @@ package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
-import baymax.Ui;
+import baymax.task.Task;
 import baymax.task.Todo;
 
 /**
@@ -25,15 +25,22 @@ public class AddTodoCommand extends AddCommand {
      * adding it to the task list, saving the updated list to storage, and notifying the user via the UI.
      *
      * @param tasks   The task list to which the to-do task is added.
-     * @param ui      The UI component used to display messages.
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Todo newTask = new Todo(this.taskName);
         tasks.addTask(newTask);
         storage.saveTasks(tasks);
-        ui.printNewTodo(newTask);
+        return printNewTodo(newTask);
+    }
+    /**
+     * Returns a String when a new to-do task is added.
+     *
+     * @param newTask The newly added to-do task.
+     */
+    private String printNewTodo(Task newTask) {
+        return "added: " + newTask;
     }
 }
 

@@ -41,8 +41,6 @@ public class Parser {
         case "delete":
             taskNumber = Integer.parseInt(input.split(" ")[1]);
             return new DeleteCommand(taskNumber);
-        case "bye":
-            return new ExitCommand();
         case "find":
             return new FindCommand(input.substring(5));
         default:

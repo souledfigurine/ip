@@ -2,7 +2,6 @@ package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
-import baymax.Ui;
 
 /**
  * Represents a command that deletes a task from the task list in the Baymax chatbot.
@@ -27,17 +26,26 @@ public class DeleteCommand extends Command {
      * If the task number is invalid, an error message is displayed.
      *
      * @param tasks   The task list from which the task is deleted.
-     * @param ui      The UI component used to display messages.
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             tasks.delete(taskNumber);
             storage.saveTasks(tasks);
-            ui.printDeleteTask(taskNumber);
+            return printDeleteTask(taskNumber);
         } catch (IndexOutOfBoundsException e) {
-            ui.printError(e.getMessage());
+            return e.getMessage();
         }
+    }
+    /**
+     * Prints a message when a task is deleted.
+     *
+     * @param taskNumber The number of the deleted task.
+     */
+    public String printDeleteTask(int taskNumber) {
+        String output = "Yay! One less task for you! \n";
+        output += "Deleted task number: " + taskNumber;
+        return output;
     }
 }
