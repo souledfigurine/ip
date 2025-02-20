@@ -1,3 +1,4 @@
+import baymax.Baymax;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,10 +19,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Baymax baymax;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
+    private Image baymaxImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
 
     @FXML
     public void initialize() {
@@ -29,8 +30,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /** Injects the Duke instance */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setBaymax(Baymax baymax) {
+        this.baymax = baymax;
     }
 
     /**
@@ -40,10 +41,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = baymax.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, baymaxImage)
         );
         userInput.clear();
     }
