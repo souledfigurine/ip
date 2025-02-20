@@ -2,7 +2,6 @@ package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
-import baymax.Ui;
 import baymax.task.Event;
 
 /**
@@ -31,14 +30,21 @@ public class AddEventCommand extends AddCommand {
      * adding it to the task list, saving the updated list to storage, and notifying the user via the UI.
      *
      * @param tasks   The task list to which the event task is added.
-     * @param ui      The UI component used to display messages.
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Event newTask = new Event(taskName, from, to);
         tasks.addTask(newTask);
         storage.saveTasks(tasks);
-        ui.printNewEvent(newTask);
+        return printNewEvent(newTask);
+    }
+    /**
+     * Prints a message when a new event task is added.
+     *
+     * @param newTask The newly added event task.
+     */
+    private String printNewEvent(Event newTask) {
+        return "added: " + newTask;
     }
 }

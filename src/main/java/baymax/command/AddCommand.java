@@ -16,15 +16,4 @@ public abstract class AddCommand extends Command {
     public AddCommand(String taskName) {
         this.taskName = taskName;
     }
-
-    /**
-     * Returns whether this command signals an exit from the program.
-     * Since add commands do not exit the program, this method always returns {@code false}.
-     *
-     * @return {@code false}, as add commands do not terminate the chatbot.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -11,13 +11,11 @@ import java.time.format.DateTimeParseException;
  * (e.g., {@code "yyyy-MM-dd HHmm"}) or just a date (e.g., {@code "yyyy-MM-dd"}).
  */
 public class Deadline extends Task {
-    private LocalDateTime byDateTime;
-    private LocalDate byDate;
-
     private static final DateTimeFormatter INPUT_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-
+    private LocalDateTime byDateTime;
+    private LocalDate byDate;
     /**
      * Constructs a new {@code Deadline} task with the specified name and deadline.
      * The task is initially marked as incomplete.

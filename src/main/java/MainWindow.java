@@ -24,12 +24,22 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image baymaxImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
 
+    /**
+     * Initializes the GUI. Sets up scrolling behavior and loads Baymax's greeting.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // Initialize Baymax instance
+        baymax = new Baymax();
+
+        // Display Baymax's greeting at startup
+        dialogContainer.getChildren().add(
+                DialogBox.getBaymaxDialog(baymax.getGreeting(), baymaxImage)
+        );
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Baymax instance */
     public void setBaymax(Baymax baymax) {
         this.baymax = baymax;
     }
@@ -44,7 +54,7 @@ public class MainWindow extends AnchorPane {
         String response = baymax.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, baymaxImage)
+                DialogBox.getBaymaxDialog(response, baymaxImage)
         );
         userInput.clear();
     }

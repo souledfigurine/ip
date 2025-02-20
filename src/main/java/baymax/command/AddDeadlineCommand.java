@@ -2,7 +2,6 @@ package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
-import baymax.Ui;
 import baymax.task.Deadline;
 
 /**
@@ -28,14 +27,21 @@ public class AddDeadlineCommand extends AddCommand {
      * adding it to the task list, saving the updated list to storage, and notifying the user via the UI.
      *
      * @param tasks   The task list to which the deadline task is added.
-     * @param ui      The UI component used to display messages.
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Deadline newTask = new Deadline(taskName, by);
         tasks.addTask(newTask);
         storage.saveTasks(tasks);
-        ui.printNewDeadline(newTask);
+        return printNewDeadline(newTask);
+    }
+    /**
+     * Returns a String when a new deadline task is added.
+     *
+     * @param newTask The newly added deadline task.
+     */
+    private String printNewDeadline(Deadline newTask) {
+        return "added: " + newTask;
     }
 }

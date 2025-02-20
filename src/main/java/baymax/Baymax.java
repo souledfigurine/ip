@@ -47,4 +47,13 @@ public class Baymax {
             return "Invalid command. Please try again.";
         }
     }
+    /**
+     * Returns Baymax's greeting message.
+     *
+     * @return A greeting message.
+     */
+    public String getGreeting() {
+        return "Hello! I'm Baymax, your personal emotional companion :)\n"
+                + "How may I help you today?";
+    }
 }

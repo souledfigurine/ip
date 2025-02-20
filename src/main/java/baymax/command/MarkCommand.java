@@ -2,7 +2,6 @@ package baymax.command;
 
 import baymax.Storage;
 import baymax.TaskList;
-import baymax.Ui;
 import baymax.task.Task;
 
 /**
@@ -27,13 +26,20 @@ public class MarkCommand extends Command {
      * saving the updated task list to storage, and notifying the user.
      *
      * @param tasks   The task list containing the task to be marked as completed.
-     * @param ui      The UI component used to display confirmation messages.
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Task task = tasks.markAsDone(taskNumber);
         storage.saveTasks(tasks);
-        ui.printMarkAsDone(task);
+        return printMarkAsDone(task);
+    }
+    /**
+     * Prints a message when a task is marked as completed.
+     *
+     * @param task The task that was marked as completed.
+     */
+    private String printMarkAsDone(Task task) {
+        return "Good job on completing the task: " + task + " !";
     }
 }
