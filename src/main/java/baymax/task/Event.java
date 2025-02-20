@@ -11,14 +11,13 @@ import java.time.format.DateTimeParseException;
  * It supports input formats with or without time components.
  */
 public class Event extends Task {
+    private static final DateTimeFormatter INPUT_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
     private LocalDateTime fromDateTime;
     private LocalDateTime toDateTime;
     private LocalDate fromDate;
     private LocalDate toDate;
-
-    private static final DateTimeFormatter INPUT_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     /**
      * Constructs a new {@code Event} task with the given name, start date/time, and end date/time.
@@ -30,6 +29,7 @@ public class Event extends Task {
     public Event(String name, String from, String to) {
         super(name);
         parseDates(from, to);
+        assert (fromDate != null || toDate != null) : "Event start and end dates should not be null";
     }
 
     /**
@@ -43,6 +43,7 @@ public class Event extends Task {
     public Event(String name, String from, String to, Boolean isCompleted) {
         super(name, isCompleted);
         parseDates(from, to);
+        assert (fromDate != null || toDate != null) : "Event start and end dates should not be null";
     }
 
     /**
@@ -108,8 +109,12 @@ public class Event extends Task {
      * @return A formatted string representing the date/time.
      */
     private String formatDateTime(LocalDateTime dateTime, LocalDate date) {
-        if (dateTime != null) return dateTime.format(DISPLAY_FORMATTER);
-        if (date != null) return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        if (dateTime != null) {
+            return dateTime.format(DISPLAY_FORMATTER);
+        }
+        if (date != null) {
+            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
         return "Invalid date";
     }
 
@@ -121,8 +126,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + formatDateTime(fromDateTime, fromDate) +
-                " to: " + formatDateTime(toDateTime, toDate) + ")";
+        return "[E]" + super.toString() + " (from: " + formatDateTime(fromDateTime, fromDate)
+                + " to: " + formatDateTime(toDateTime, toDate) + ")";
     }
 
     /**
@@ -133,9 +138,9 @@ public class Event extends Task {
      */
     @Override
     public String toFileString() {
-        return "E" + super.toFileString() + " | " +
-                (fromDateTime != null ? fromDateTime.format(INPUT_FORMATTER_2) : fromDate.format(INPUT_FORMATTER_1)) +
-                " | " +
-                (toDateTime != null ? toDateTime.format(INPUT_FORMATTER_2) : toDate.format(INPUT_FORMATTER_1));
+        return "E" + super.toFileString() + " | "
+                + (fromDateTime != null ? fromDateTime.format(INPUT_FORMATTER_2) : fromDate.format(INPUT_FORMATTER_1))
+                + " | "
+                + (toDateTime != null ? toDateTime.format(INPUT_FORMATTER_2) : toDate.format(INPUT_FORMATTER_1));
     }
 }

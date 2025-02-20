@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import baymax.Baymax;
+import baymax.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
