@@ -11,15 +11,13 @@ import java.time.format.DateTimeParseException;
  * It supports input formats with or without time components.
  */
 public class Event extends Task {
+    private static final DateTimeFormatter INPUT_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
     private LocalDateTime fromDateTime;
     private LocalDateTime toDateTime;
     private LocalDate fromDate;
     private LocalDate toDate;
-
-    private static final DateTimeFormatter INPUT_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-
     /**
      * Constructs a new {@code Event} task with the given name, start date/time, and end date/time.
      *
@@ -68,18 +66,12 @@ public class Event extends Task {
             }
 
             if (getFromAsDateTime().isAfter(getToAsDateTime())) {
-                System.out.println("Error: 'from' date must be before 'to' date.");
-                this.fromDateTime = null;
-                this.toDateTime = null;
-                this.fromDate = null;
-                this.toDate = null;
+                throw new IllegalArgumentException("Error: 'From' date must be before 'To' date.");
             }
-
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid event format! Use 'yyyy-MM-dd' or 'd/M/yyyy HHmm' (e.g., 2/12/2019 1800).");
+            throw new IllegalArgumentException("Invalid event format! Use 'yyyy-MM-dd' or 'yyyy-MM-dd HHmm'.");
         }
     }
-
     /**
      * Returns the start date/time of the event.
      * If only a date was provided, it defaults to the start of the day (00:00).
@@ -108,8 +100,12 @@ public class Event extends Task {
      * @return A formatted string representing the date/time.
      */
     private String formatDateTime(LocalDateTime dateTime, LocalDate date) {
-        if (dateTime != null) return dateTime.format(DISPLAY_FORMATTER);
-        if (date != null) return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        if (dateTime != null) {
+            return dateTime.format(DISPLAY_FORMATTER);
+        }
+        if (date != null) {
+            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
         return "Invalid date";
     }
 
@@ -121,8 +117,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + formatDateTime(fromDateTime, fromDate) +
-                " to: " + formatDateTime(toDateTime, toDate) + ")";
+        return "[E]" + super.toString() + " (from: " + formatDateTime(fromDateTime, fromDate)
+                + " to: " + formatDateTime(toDateTime, toDate) + ")";
     }
 
     /**
@@ -133,9 +129,9 @@ public class Event extends Task {
      */
     @Override
     public String toFileString() {
-        return "E" + super.toFileString() + " | " +
-                (fromDateTime != null ? fromDateTime.format(INPUT_FORMATTER_2) : fromDate.format(INPUT_FORMATTER_1)) +
-                " | " +
-                (toDateTime != null ? toDateTime.format(INPUT_FORMATTER_2) : toDate.format(INPUT_FORMATTER_1));
+        return "E" + super.toFileString() + " | "
+                + (fromDateTime != null ? fromDateTime.format(INPUT_FORMATTER_2) : fromDate.format(INPUT_FORMATTER_1))
+                + " | "
+                + (toDateTime != null ? toDateTime.format(INPUT_FORMATTER_2) : toDate.format(INPUT_FORMATTER_1));
     }
 }
