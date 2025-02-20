@@ -10,7 +10,7 @@ import baymax.task.*;
  * to maintain persistence between program runs.
  */
 public class Storage {
-    private static final String FILE_PATH = "./data/duke.txt";
+    private static final String FILE_PATH = System.getProperty("user.home") + "/baymax_data/baymax.txt";
     private File file;
     private File directory;
 
@@ -20,8 +20,9 @@ public class Storage {
      * If the storage file does not exist, it creates a new file.
      */
     public Storage() {
-        file = new File(FILE_PATH);
-        directory = file.getParentFile();
+        String directoryPath = System.getProperty("user.home") + "/baymax_data";
+        file = new File(directoryPath + "/duke.txt");
+        directory = new File(directoryPath);
 
         if (directory != null && !directory.exists()) {
             directory.mkdirs();

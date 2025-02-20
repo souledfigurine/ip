@@ -20,9 +20,9 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Baymax baymax;
+    private Image userImage = new Image(MainWindow.class.getResource("/images/user.png").toString());
+    private Image baymaxImage = new Image(MainWindow.class.getResource("/images/baymax.png").toString());
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image baymaxImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
 
     /**
      * Initializes the GUI. Sets up scrolling behavior and loads Baymax's greeting.
