@@ -1,5 +1,7 @@
 package baymax.command;
 
+import java.io.IOException;
+
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.task.Task;
@@ -28,7 +30,7 @@ public class AddTodoCommand extends AddCommand {
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         Todo newTask = new Todo(this.taskName);
         tasks.addTask(newTask);
         storage.saveTasks(tasks);

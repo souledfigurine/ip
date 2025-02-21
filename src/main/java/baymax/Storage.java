@@ -11,6 +11,13 @@ import baymax.task.*;
  */
 public class Storage {
     private static final String FILE_PATH = System.getProperty("user.home") + "/baymax_data/baymax.txt";
+    private static final String DIRECTORY_PATH = System.getProperty("user.home") + "/baymax_data";
+
+    private static final String ERROR_CREATING_FILE = "Error creating storage file: ";
+    private static final String ERROR_SAVING_TASKS = "Error saving tasks: ";
+    private static final String ERROR_LOADING_TASKS = "Error loading tasks: ";
+    private static final String ERROR_CORRUPTED_TASK = "Skipping corrupted task: ";
+
     private File file;
     private File directory;
 
@@ -20,20 +27,21 @@ public class Storage {
      * If the storage file does not exist, it creates a new file.
      */
     public Storage() {
-        String directoryPath = System.getProperty("user.home") + "/baymax_data";
-        file = new File(directoryPath + "/duke.txt");
-        directory = new File(directoryPath);
+        file = new File(DIRECTORY_PATH + "/duke.txt");
+        directory = new File(DIRECTORY_PATH);
+        createStorageIfNotExists();
+    }
 
-        if (directory != null && !directory.exists()) {
-            directory.mkdirs();
-        }
-
+    private void createStorageIfNotExists() {
         try {
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
             if (!file.exists()) {
                 file.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("Error creating storage file: " + e.getMessage());
+            throw new RuntimeException(ERROR_CREATING_FILE + e.getMessage());
         }
     }
 
@@ -43,14 +51,14 @@ public class Storage {
      *
      * @param tasks The {@code TaskList} containing tasks to be saved.
      */
-    public void saveTasks(TaskList tasks) {
+    public void saveTasks(TaskList tasks) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) { // Overwrites file
             for (Task task : tasks.getTasks()) {
                 writer.write(task.toFileString()); // Writes each task to file
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error saving tasks.");
+            throw new IOException(ERROR_SAVING_TASKS + e.getMessage());
         }
     }
 

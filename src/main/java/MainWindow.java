@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 /**
  * Controller for the main GUI.
  */
@@ -49,9 +52,14 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         String input = userInput.getText();
-        String response = baymax.getResponse(input);
+        String response = null;
+        try {
+            response = baymax.getResponse(input);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getBaymaxDialog(response, baymaxImage)

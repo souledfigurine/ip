@@ -1,5 +1,7 @@
 package baymax.command;
 
+import java.io.IOException;
+
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.task.Event;
@@ -33,7 +35,7 @@ public class AddEventCommand extends AddCommand {
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         Event newTask = new Event(taskName, from, to);
         tasks.addTask(newTask);
         storage.saveTasks(tasks);

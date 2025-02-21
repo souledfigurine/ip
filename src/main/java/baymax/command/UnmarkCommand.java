@@ -1,8 +1,11 @@
 package baymax.command;
 
+import java.io.IOException;
+
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.task.Task;
+
 
 /**
  * Represents a command that marks a task as incomplete in the Baymax chatbot.
@@ -29,7 +32,7 @@ public class UnmarkCommand extends Command {
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         Task task = tasks.unmark(taskNumber);
         storage.saveTasks(tasks);
         return printUnmark(task);

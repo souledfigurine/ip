@@ -4,6 +4,8 @@ import baymax.Storage;
 import baymax.TaskList;
 import baymax.task.Deadline;
 
+import java.io.IOException;
+
 /**
  * Represents a command that adds a deadline task to the task list in the Baymax chatbot.
  * This command creates a new {@code Deadline} task and updates the task list and storage accordingly.
@@ -30,7 +32,7 @@ public class AddDeadlineCommand extends AddCommand {
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         Deadline newTask = new Deadline(taskName, by);
         tasks.addTask(newTask);
         storage.saveTasks(tasks);

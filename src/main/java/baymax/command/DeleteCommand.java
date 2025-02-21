@@ -3,6 +3,8 @@ package baymax.command;
 import baymax.Storage;
 import baymax.TaskList;
 
+import java.io.IOException;
+
 /**
  * Represents a command that deletes a task from the task list in the Baymax chatbot.
  * This command removes a specified task from the task list, updates storage,
@@ -29,7 +31,7 @@ public class DeleteCommand extends Command {
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         try {
             tasks.delete(taskNumber);
             storage.saveTasks(tasks);

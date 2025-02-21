@@ -8,6 +8,7 @@ import baymax.TaskList;
  * This command retrieves the current tasks from the task list and displays them to the user.
  */
 public class ListCommand extends Command {
+    private static final String EMPTY_LIST = "You are free! You currently have 0 tasks.";
 
     /**
      * Executes the list command by displaying all tasks in the task list.
@@ -28,7 +29,7 @@ public class ListCommand extends Command {
      */
     private String printList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return "You are free! You currently have 0 tasks.";
+            return EMPTY_LIST;
         }
         return generateList(tasks);
     }

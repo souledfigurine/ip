@@ -8,6 +8,7 @@ import baymax.TaskList;
  * The search is case-insensitive and returns a list of matching tasks.
  */
 public class FindCommand extends Command {
+    private static final String NO_MATCHING_LIST = "oh man, it seems like there are no matching tasks";
     private String keyword;
 
     /**
@@ -39,7 +40,7 @@ public class FindCommand extends Command {
      */
     private String printMatchingList(TaskList matchingTasks) {
         if (matchingTasks.isEmpty()) {
-            return "oh man, it seems like there are no matching tasks";
+            return NO_MATCHING_LIST;
         }
         return generateList(matchingTasks);
     }
