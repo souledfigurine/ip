@@ -8,7 +8,7 @@ import baymax.task.Task;
  * Provides functionality to add, delete, mark, and unmark tasks.
  */
 public class TaskList {
-    private static ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructs a new empty {@code TaskList}.
