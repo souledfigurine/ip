@@ -21,7 +21,7 @@ public class DeadlineTest {
     @Test
     void testDeadlineCreationWithInvalidDate() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Deadline("Invalid date", "15-Mar-2024");
+            new Deadline("Invalid date", "2024-11");
         });
 
         assertTrue(exception.getMessage().contains("Invalid"));

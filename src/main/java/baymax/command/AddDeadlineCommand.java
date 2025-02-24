@@ -44,6 +44,7 @@ public class AddDeadlineCommand extends AddCommand {
         storage.saveTasks(tasks);
         return printNewDeadline(newTask);
     }
+
     /**
      * Returns a String when a new deadline task is added.
      *
@@ -51,27 +52,5 @@ public class AddDeadlineCommand extends AddCommand {
      */
     private String printNewDeadline(Deadline newTask) {
         return "added: " + newTask;
-    }
-
-    private void validateDate(String date) {
-        DateTimeFormatter[] formatters = {
-                DateTimeFormatter.ofPattern("yyyy-MM-dd"),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")
-        };
-
-        boolean valid = false;
-        for (DateTimeFormatter formatter : formatters) {
-            try {
-                if (date.contains(" ")) {
-                    LocalDateTime.parse(date, formatter);
-                } else {
-                    LocalDate.parse(date, formatter);
-                }
-                valid = true;
-                break;
-            } catch (DateTimeParseException e) {
-                throw new IllegalArgumentException(ERROR_INVALID_DATE);
-            }
-        }
     }
 }

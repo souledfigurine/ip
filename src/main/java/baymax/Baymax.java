@@ -58,7 +58,7 @@ public class Baymax {
             }
             return command.execute(tasks, storage);
         } catch (IllegalArgumentException e) {
-            return ERROR_INVALID_COMMAND;
+            return e.getMessage();
         }
     }
     /**
