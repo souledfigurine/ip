@@ -40,7 +40,7 @@ public class ListCommand extends Command {
      * @param tasks The {@code TaskList} containing the tasks to be displayed.
      */
     private String generateList(TaskList tasks) {
-        String output = null;
+        String output = new String();
         for (int i = 0; i < tasks.getTasks().size(); i++) {
             int taskNumber = i + 1;
             output += taskNumber + ". " + tasks.getTasks().get(i) + "\n";
