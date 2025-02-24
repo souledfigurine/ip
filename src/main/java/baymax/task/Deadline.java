@@ -26,6 +26,7 @@ public class Deadline extends Task {
     public Deadline(String name, String deadline) {
         super(name);
         determineDeadlineType(deadline);
+        assert (byDate != null || byDateTime != null) : "Deadline date should not be null";
     }
 
     /**
@@ -38,6 +39,7 @@ public class Deadline extends Task {
     public Deadline(String name, String deadline, boolean isCompleted) {
         super(name, isCompleted);
         determineDeadlineType(deadline);
+        assert (byDate != null || byDateTime != null) : "Deadline date should not be null";
     }
 
     /**
@@ -91,8 +93,12 @@ public class Deadline extends Task {
      * @return A formatted string representing the deadline.
      */
     private String formatDeadline() {
-        if (byDateTime != null) return byDateTime.format(DISPLAY_FORMATTER);
-        if (byDate != null) return byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        if (byDateTime != null) {
+            return byDateTime.format(DISPLAY_FORMATTER);
+        }
+        if (byDate != null) {
+            return byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
         return "Invalid date";
     }
 

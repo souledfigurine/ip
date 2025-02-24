@@ -16,6 +16,8 @@ public class Parser {
      * @return A {@code Command} object that corresponds to the user input.
      */
     public static Command parse(String input) {
+        assert (input != null && !input.trim().isEmpty()) : "Command input should not be null or empty";
+
         String commandWord = input.split(" ")[0];
         String[] parts;
         int taskNumber;
@@ -25,9 +27,11 @@ public class Parser {
             return new ListCommand();
         case "mark":
             taskNumber = Integer.parseInt(input.split(" ")[1]);
+            assert (taskNumber > 0) : "Task number must be positive for marking";
             return new MarkCommand(taskNumber);
         case "unmark":
             taskNumber = Integer.parseInt(input.split(" ")[1]);
+            assert (taskNumber > 0) : "Task number must be positive for marking";
             return new UnmarkCommand(taskNumber);
         case "todo":
             return new AddTodoCommand(input.substring(5));
