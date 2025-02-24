@@ -5,9 +5,6 @@ import java.io.IOException;
 import baymax.Storage;
 import baymax.TaskList;
 
-
-
-
 /**
  * Represents an abstract command in the Baymax chatbot.
  * Commands are executed based on user input and can manipulate the task list,

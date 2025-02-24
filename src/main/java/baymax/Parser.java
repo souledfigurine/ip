@@ -8,17 +8,6 @@ import baymax.command.*;
  * determining the appropriate action to be executed.
  */
 public class Parser {
-    private static final String INVALID_INPUT = "oopsie idk watchu talking\n"
-            + "make it make sense heresies thk uu\n"
-            + "1. list                 - View all tasks\n"
-            + "2. todo <task>        - Add a to-do task\n"
-            + "3. deadline <task> /by when  - Add a deadline\n"
-            + "4. event <task> /from when /to when  - Add an event\n"
-            + "5. mark <task number> - Mark a task as completed\n"
-            + "6. unmark <task number> - Unmark a completed task\n"
-            + "7. delete <task number>  - Delete a task\n"
-            + "8. find <keyword>    - Search for tasks containing keyword\n";
-
     /**
      * Parses the user input and returns a {@code Command} object corresponding to the input command.
      *
@@ -58,7 +47,7 @@ public class Parser {
         case "find":
             return new FindCommand(input.substring(5));
         default:
-            return new ErrorCommand(INVALID_INPUT);
+            return new HelpCommand();
         }
     }
 }
