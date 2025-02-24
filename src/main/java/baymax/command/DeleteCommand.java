@@ -48,4 +48,13 @@ public class DeleteCommand extends Command {
         output += "Deleted task number: " + taskNumber;
         return output;
     }
+    /**
+     * Returns the task number associated with this command.
+     *
+     * @return The task number as an integer.
+     */
+    public int getTaskNumber() {
+        return this.taskNumber;
+    }
+
 }

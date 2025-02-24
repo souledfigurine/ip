@@ -12,8 +12,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
     private static final DateTimeFormatter INPUT_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter INPUT_FORMATTER_2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+  
     private LocalDateTime fromDateTime;
     private LocalDateTime toDateTime;
     private LocalDate fromDate;
@@ -69,18 +70,12 @@ public class Event extends Task {
             }
 
             if (getFromAsDateTime().isAfter(getToAsDateTime())) {
-                System.out.println("Error: 'from' date must be before 'to' date.");
-                this.fromDateTime = null;
-                this.toDateTime = null;
-                this.fromDate = null;
-                this.toDate = null;
+                throw new IllegalArgumentException("Error: 'From' date must be before 'To' date.");
             }
-
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid event format! Use 'yyyy-MM-dd' or 'd/M/yyyy HHmm' (e.g., 2/12/2019 1800).");
+            throw new IllegalArgumentException("Invalid event format! Use 'yyyy-MM-dd' or 'yyyy-MM-dd HHmm'.");
         }
     }
-
     /**
      * Returns the start date/time of the event.
      * If only a date was provided, it defaults to the start of the day (00:00).

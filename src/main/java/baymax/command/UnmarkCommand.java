@@ -42,5 +42,14 @@ public class UnmarkCommand extends Command {
     private String printUnmark(Task task) {
         return "I have unmarked the task: " + task + " for you!";
     }
+    /**
+     * Returns the task number associated with this command.
+     *
+     * @return The task number as an integer.
+     */
+    public int getTaskNumber() {
+        return this.taskNumber;
+    }
+
 }
 

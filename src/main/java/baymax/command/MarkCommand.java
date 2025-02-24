@@ -42,4 +42,13 @@ public class MarkCommand extends Command {
     private String printMarkAsDone(Task task) {
         return "Good job on completing the task: " + task + " !";
     }
+    /**
+     * Returns the task number associated with this command.
+     *
+     * @return The task number as an integer.
+     */
+    public int getTaskNumber() {
+        return this.taskNumber;
+    }
+
 }
