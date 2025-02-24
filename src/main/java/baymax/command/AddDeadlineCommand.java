@@ -1,16 +1,22 @@
 package baymax.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import baymax.Storage;
 import baymax.TaskList;
 import baymax.task.Deadline;
 
-import java.io.IOException;
 
 /**
  * Represents a command that adds a deadline task to the task list in the Baymax chatbot.
  * This command creates a new {@code Deadline} task and updates the task list and storage accordingly.
  */
 public class AddDeadlineCommand extends AddCommand {
+    private static final String ERROR_INVALID_DATE = "Invalid date format! Use 'yyyy-MM-dd' or 'yyyy-MM-dd HHmm'.";
     private final String by;
 
     /**
@@ -45,5 +51,27 @@ public class AddDeadlineCommand extends AddCommand {
      */
     private String printNewDeadline(Deadline newTask) {
         return "added: " + newTask;
+    }
+
+    private void validateDate(String date) {
+        DateTimeFormatter[] formatters = {
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")
+        };
+
+        boolean valid = false;
+        for (DateTimeFormatter formatter : formatters) {
+            try {
+                if (date.contains(" ")) {
+                    LocalDateTime.parse(date, formatter);
+                } else {
+                    LocalDate.parse(date, formatter);
+                }
+                valid = true;
+                break;
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException(ERROR_INVALID_DATE);
+            }
+        }
     }
 }

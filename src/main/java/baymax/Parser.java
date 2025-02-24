@@ -81,10 +81,10 @@ public class Parser {
 
     /** Parses and validates a deadline command */
     private static Command parseDeadlineCommand(String args) {
-        if (!args.toLowerCase().contains(" /by ")) {
-            return new ErrorCommand("Oops! A deadline must be in the format: deadline <task> /by <date>.");
+        if (!args.contains(" (?)/by ")) {
+            return new ErrorCommand("Oops! A deadline must be in the format: deadline <task> /by <yyyy-MM-dd optional:HHmm>.");
         }
-        String[] parts = args.split(" /by ", 2);
+        String[] parts = args.split(" (?)/by ", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
             return new ErrorCommand("Oops! A deadline must have a name and a valid date.");
         }
@@ -93,14 +93,14 @@ public class Parser {
 
     /** Parses and validates an event command */
     private static Command parseEventCommand(String args) {
-        if (!args.toLowerCase().contains(" /from ") || !args.toLowerCase().contains(" /to ")) {
-            return new ErrorCommand("Oops! An event must be in the format: event <task> /from <start> /to <end>.");
+        if (!args.contains(" (?)/from ") || !args.contains(" (?)/to ")) {
+            return new ErrorCommand("Oops! An event must be in the format: event <task> /from <yyyy-MM-dd optional:HHmm> /to <yyyy-MM-dd optional:HHmm>.");
         }
-        String[] parts = args.split(" /from ", 2);
+        String[] parts = args.split(" (?)/from ", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty()) {
             return new ErrorCommand("Oops! An event must have a name.");
         }
-        String[] timeParts = parts[1].split(" /to ", 2);
+        String[] timeParts = parts[1].split(" (?)/to ", 2);
         if (timeParts.length < 2 || timeParts[0].trim().isEmpty() || timeParts[1].trim().isEmpty()) {
             return new ErrorCommand("Oops! An event must have a start and end time.");
         }
