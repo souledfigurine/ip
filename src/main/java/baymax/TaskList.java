@@ -32,6 +32,7 @@ public class TaskList {
      * @param task The new task to be added.
      */
     public void addTask(Task task) {
+        assert task != null: "Task being added should never be null";
         tasks.add(task);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @return The task that was marked as completed.
      */
     public Task markAsDone(int taskNumber) {
+        assert (taskNumber > 0 && taskNumber <= tasks.size()) : "Invalid task number for marking as done";
         Task task = tasks.get(taskNumber - 1);
         task.markAsCompleted();
         return task;
@@ -54,6 +56,7 @@ public class TaskList {
      * @return The task that was unmarked.
      */
     public Task unmark(int taskNumber) {
+        assert (taskNumber > 0 && taskNumber <= tasks.size()) : "Invalid task number for un-marking task";
         Task task = tasks.get(taskNumber - 1);
         task.unmarkAsCompleted();
         return task;
